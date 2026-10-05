@@ -1,329 +1,583 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unnati: Product Strategy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #030712; /* Even darker background */
-        }
-        .gradient-text {
-            background: linear-gradient(90deg, #818cf8, #f472b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .hero-bg {
-             background-color: #111827;
-             background-image:
-                radial-gradient(at 47% 33%, hsl(218.00, 89%, 60%) 0px, transparent 50%),
-                radial-gradient(at 9% 65%, hsl(240.00, 89%, 70%) 0px, transparent 50%),
-                radial-gradient(at 93% 16%, hsl(323.00, 89%, 60%) 0px, transparent 50%);
-             background-repeat: no-repeat;
-        }
-        /* Animation styles */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .timeline-item {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .timeline-item.right {
-             transform: translateX(40px);
-        }
-        .timeline-item.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .feature-card {
-            transform-style: preserve-3d;
-            transition: transform 0.5s, box-shadow 0.5s;
-        }
-        .feature-card:hover {
-            transform: rotateY(var(--rotate-y, 0)) rotateX(var(--rotate-x, 0)) scale(1.05);
-            box-shadow: 0 0 35px rgba(129, 140, 248, 0.3);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unnati — Savings that speak her language</title>
+<meta name="description" content="Unnati is a phygital savings platform for rural women in India: a voice-operated app backed by trusted local Sakhi agents and kirana Unnati Points.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Mukta:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --marigold:#F4A81D;
+  --marigold-soft:#FBD27A;
+  --rani:#C2185B;
+  --rani-deep:#9A1048;
+  --rani-soft:#F7C6D8;
+  --peacock:#0E4B50;
+  --ink:#0A3236;
+  --mist:#EAF3F1;
+  --white:#FFFFFF;
+  --line:rgba(10,50,54,.16);
+  --display:'Baloo 2', 'Mukta', system-ui, sans-serif;
+  --body:'Mukta', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --wrap:1180px;
+  --gutter:clamp(1.25rem, 4vw, 2.5rem);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;font-family:var(--body);font-size:1.125rem;line-height:1.6;color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.05;letter-spacing:-.015em}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+:focus-visible{outline:3px solid var(--rani);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:#fff;padding:.6rem 1rem;z-index:100}
+.skip:focus{left:1rem;top:1rem}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--display);font-weight:700;font-size:1.05rem;text-decoration:none;padding:.8rem 1.4rem;border-radius:999px;border:2px solid transparent;transition:transform .15s ease, background-color .15s ease}
+.btn svg{width:20px;height:20px;flex:none}
+.btn:hover{transform:translateY(-2px)}
+.btn-rani{background:var(--rani);color:#fff}
+.btn-rani:hover{background:var(--rani-deep)}
+.btn-line{border-color:var(--ink);color:var(--ink)}
+.btn-line:hover{background:var(--ink);color:var(--marigold)}
+.btn-gold{background:var(--marigold);color:var(--ink)}
+.btn-gold:hover{background:var(--marigold-soft)}
+
+/* Header */
+.site-head{position:sticky;top:0;z-index:50;background:var(--marigold);padding-top:env(safe-area-inset-top,0px);transition:box-shadow .2s ease}
+.site-head.scrolled{box-shadow:0 1px 0 rgba(10,50,54,.18)}
+.head-row{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;height:72px}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-family:var(--display);font-weight:800;font-size:1.6rem;color:var(--ink)}
+.brand svg{width:36px;height:36px}
+.nav{display:flex;gap:1.8rem}
+.nav a{text-decoration:none;font-weight:500;font-size:1.02rem;padding:.25rem 0;border-bottom:2px solid transparent}
+.nav a:hover{border-bottom-color:var(--ink)}
+.head-row .btn{padding:.55rem 1.1rem;font-size:.98rem}
+@media (max-width:860px){.nav{display:none}}
+
+/* Hero */
+.hero{background:var(--marigold);padding:clamp(2.5rem,6vw,4.5rem) 0 clamp(4rem,8vw,6.5rem);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.hero h1{font-size:clamp(2.9rem,6.4vw,5.6rem);font-weight:800;max-width:11ch}
+.tagline{margin-top:1.4rem;font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,2.8vw,2.2rem);line-height:1.25;color:var(--rani-deep)}
+.tagline-en{display:block;margin-top:.2rem;font-family:var(--body);font-weight:500;font-size:1.05rem;color:var(--ink);opacity:.8}
+.hero-lede{margin-top:1.6rem;max-width:34em;font-size:1.2rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem}
+
+/* Phone demo */
+.demo{display:flex;flex-direction:column;align-items:center;gap:1.1rem}
+.phone{width:min(318px,100%);background:var(--white);border:10px solid var(--ink);border-radius:44px;box-shadow:16px 16px 0 var(--rani);padding:14px 16px 20px;position:relative}
+.notch{width:90px;height:20px;background:var(--ink);border-radius:0 0 14px 14px;margin:-14px auto 10px}
+.ph-top{display:flex;justify-content:space-between;align-items:center;font-size:.95rem}
+.ph-hello{font-family:var(--display);font-weight:700;font-size:1.15rem}
+.pill{display:inline-flex;align-items:center;gap:.3rem;background:var(--mist);color:var(--peacock);font-size:.78rem;font-weight:700;padding:.15rem .55rem;border-radius:999px}
+.pill svg{width:13px;height:13px}
+.jar-card{margin-top:.9rem;background:var(--mist);border-radius:22px;padding:1rem;display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:center}
+.pot{width:104px;height:112px}
+.jar-name{font-family:var(--display);font-weight:700;font-size:1.25rem;line-height:1.15}
+.jar-name small{display:block;font-family:var(--body);font-weight:500;font-size:.82rem;opacity:.75}
+.jar-amt{margin-top:.5rem;font-family:var(--display);font-weight:800;font-size:1.6rem;color:var(--rani-deep);line-height:1}
+.jar-goal{font-size:.82rem;opacity:.75}
+.ph-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.7rem}
+.mini{border:1.5px solid var(--line);border-radius:16px;padding:.55rem .7rem;font-size:.8rem;line-height:1.3}
+.mini b{display:block;font-family:var(--display);font-size:1.05rem}
+.bubble{min-height:3.2rem;margin-top:.8rem;display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--display);font-weight:600;font-size:1.05rem;color:var(--peacock);padding:0 .4rem}
+.bubble.said{background:var(--marigold-soft);border-radius:16px 16px 16px 4px;color:var(--ink)}
+.mic-wrap{display:flex;flex-direction:column;align-items:center;gap:.3rem;margin-top:.4rem}
+.mic{position:relative;width:76px;height:76px;border-radius:50%;border:0;background:var(--rani);color:#fff;cursor:pointer;display:grid;place-items:center;transition:transform .15s ease}
+.mic:hover{transform:scale(1.05)}
+.mic:disabled{cursor:default}
+.mic svg{width:32px;height:32px}
+.mic::before,.mic::after{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid var(--rani);opacity:0}
+.mic.listening::before{animation:ring 1.2s ease-out infinite}
+.mic.listening::after{animation:ring 1.2s ease-out .4s infinite}
+@keyframes ring{from{transform:scale(1);opacity:.6}to{transform:scale(1.7);opacity:0}}
+.mic-label{font-family:var(--display);font-weight:700;font-size:1.05rem}
+.toast{position:absolute;left:50%;top:58px;transform:translate(-50%,-8px);background:var(--peacock);color:#fff;font-weight:700;font-size:.9rem;padding:.45rem .9rem;border-radius:999px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .25s ease, transform .25s ease}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.demo-hint{font-size:.98rem;text-align:center;max-width:26ch}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .demo{margin-top:1rem}
+}
+
+/* Section scaffolding */
+.sec{padding:clamp(4rem,9vw,7rem) 0}
+.sec-head{max-width:42rem;margin-bottom:clamp(2.5rem,5vw,3.75rem)}
+.sec-head h2{font-size:clamp(2.1rem,4.4vw,3.4rem);font-weight:800}
+.sec-head p{margin-top:1rem;font-size:1.2rem;max-width:36em}
+
+/* Barriers */
+.barriers{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.75rem)}
+.barrier{border-top:6px solid var(--c);padding-top:1.4rem}
+.barrier h3{font-size:1.9rem;font-weight:800}
+.barrier .why{margin-top:.4rem;font-size:1.08rem;min-height:3.4em}
+.feat{display:grid;grid-template-columns:44px 1fr;gap:.9rem;margin-top:1.6rem}
+.ico{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--tint);color:var(--c)}
+.ico svg{width:22px;height:22px}
+.feat h4{margin:0;font-family:var(--display);font-weight:700;font-size:1.22rem;line-height:1.2}
+.feat p{margin-top:.25rem;font-size:1.02rem}
+@media (max-width:900px){.barriers{grid-template-columns:1fr}.barrier .why{min-height:0}}
+
+/* Phygital model */
+.model{background:var(--mist)}
+.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.rings{width:100%;max-width:470px;margin:0 auto}
+.rings .ring{transition:opacity .2s ease, stroke-width .2s ease}
+.rings.focus .ring{opacity:.35}
+.rings.focus .ring.on{opacity:1;stroke:var(--rani);stroke-width:4}
+.rings text{font-family:var(--display);font-weight:700;pointer-events:none}
+.layers li{border-top:1.5px solid var(--line);padding:1.25rem 0 1.25rem 1rem;border-left:4px solid transparent;cursor:default;transition:border-color .2s ease, background-color .2s ease}
+.layers li:last-child{border-bottom:1.5px solid var(--line)}
+.layers li.on,.layers li:focus-visible{border-left-color:var(--rani);background:rgba(255,255,255,.6)}
+.layers h3{display:flex;align-items:center;gap:.6rem;font-size:1.45rem;font-weight:700}
+.layers h3 svg{width:22px;height:22px;color:var(--rani)}
+.layers p{margin-top:.3rem;font-size:1.05rem}
+.quote{margin-top:2rem;font-family:var(--display);font-weight:700;font-size:clamp(1.4rem,2.4vw,1.8rem);line-height:1.25;color:var(--peacock)}
+@media (max-width:900px){.model-grid{grid-template-columns:1fr}}
+
+/* Vision */
+.vision{background:var(--peacock);color:#fff}
+.vision-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.photo{margin:0;aspect-ratio:4/3;border-radius:28px;overflow:hidden;background:var(--rani);position:relative;box-shadow:-16px 16px 0 var(--marigold)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo .fallback{position:absolute;inset:0;display:none;place-items:center;font-family:var(--display);font-weight:800;font-size:clamp(4rem,10vw,7rem);color:var(--marigold);
+  background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,.18) 1.5px, transparent 0);background-size:22px 22px}
+.photo.no-img .fallback{display:grid}
+.vision h2{font-size:1.3rem;font-weight:700;color:var(--marigold)}
+.vision .statement{margin-top:.9rem;font-family:var(--display);font-weight:700;font-size:clamp(2rem,3.8vw,3.1rem);line-height:1.1}
+.vision .support{margin-top:1.4rem;font-size:1.2rem;opacity:.88;max-width:32em}
+@media (max-width:900px){.vision-grid{grid-template-columns:1fr}}
+
+/* Roadmap */
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.5rem);position:relative}
+.road::before{content:"";position:absolute;left:28px;right:28px;top:28px;height:4px;background:var(--line);border-radius:4px}
+.phase{position:relative}
+.phase .num{width:56px;height:56px;border-radius:50%;background:var(--c);color:var(--n,#fff);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.6rem;position:relative;border:6px solid #fff}
+.phase .when{margin-top:1.3rem;font-weight:700;color:var(--c-text,var(--c))}
+.phase h3{margin-top:.2rem;font-size:1.75rem;font-weight:800}
+.phase .theme{margin-top:.15rem;font-size:1.02rem;opacity:.75}
+.phase ul{margin-top:1rem}
+.phase li{position:relative;padding-left:1.3rem;margin-top:.55rem;font-size:1.05rem}
+.phase li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--c)}
+@media (max-width:900px){
+  .road{grid-template-columns:1fr}
+  .road::before{left:26px;right:auto;top:28px;bottom:28px;width:4px;height:auto}
+  .phase{padding-left:76px}
+  .phase .num{position:absolute;left:0;top:0}
+  .phase .when{margin-top:.6rem}
+}
+
+/* CTA */
+.cta{background:var(--rani);color:#fff;padding:clamp(3.5rem,7vw,5.5rem) 0}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2rem}
+.cta h2{font-size:clamp(2rem,4vw,3.1rem);font-weight:800;max-width:16ch}
+.cta p{margin-top:.6rem;font-size:1.15rem;opacity:.9;max-width:30em}
+.cta .btn{font-size:1.15rem;padding:1rem 1.7rem}
+
+/* Footer */
+.foot{background:var(--ink);color:#fff;padding:2.75rem 0 calc(2.75rem + env(safe-area-inset-bottom,0px))}
+.foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.25rem}
+.foot .brand{color:#fff}
+.foot a.mail{color:var(--marigold);text-decoration:none;font-weight:500}
+.foot a.mail:hover{text-decoration:underline}
+.foot small{display:block;opacity:.6;font-size:.95rem}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
 </head>
-<body class="bg-gray-900 text-gray-200 antialiased">
+<body>
+<a class="skip" href="#main">Skip to content</a>
 
-    <!-- Header -->
-    <header class="bg-gray-900/70 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-md shadow-black/10">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white flex items-center">
-                <!-- Unnati Logo -->
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-indigo-400 mr-2">
-                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M15 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 15V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 12C12 12 14 10 16 10C18 10 19 11 19 12.5C19 14 18 15 16 15C14 15 12 14 12 12Z" fill="currentColor" opacity="0.2"/>
-                    <path d="M12 12C12 12 10 14 8 14C6 14 5 13 5 11.5C5 10 6 9 8 9C10 9 12 10 12 12Z" fill="currentColor" opacity="0.2"/>
-                    <path d="M12 12C12 12 14 10 16 10C18 10 19 11 19 12.5C19 14 18 15 16 15C14 15 12 14 12 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 12C12 12 10 14 8 14C6 14 5 13 5 11.5C5 10 6 9 8 9C10 9 12 10 12 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Unnati
-            </a>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#vision" class="text-gray-300 hover:text-white transition-colors duration-300">Vision</a>
-                <a href="#features" class="text-gray-300 hover:text-white transition-colors duration-300">Features</a>
-                <a href="#strategy" class="text-gray-300 hover:text-white transition-colors duration-300">Strategy</a>
-                <a href="#roadmap" class="text-gray-300 hover:text-white transition-colors duration-300">Roadmap</a>
-            </nav>
-            <a href="https://drive.google.com/file/d/1VHZewk5HbMkbqQtWX06bc_YgKAIPu_RF/view?usp=share_link" target="_blank" class="bg-indigo-500 text-white px-5 py-2 rounded-full hover:bg-indigo-600 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-indigo-500/20">
-                View PDF
-            </a>
+<header class="site-head" id="top">
+  <div class="wrap head-row">
+    <a class="brand" href="#top" aria-label="Unnati home">
+      <svg viewBox="0 0 36 36" aria-hidden="true">
+        <circle cx="18" cy="18" r="17" fill="#C2185B"/>
+        <path d="M18 28V15" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M18 19c0-4.6 3.2-7.8 8.6-7.8 0 4.6-3.2 7.8-8.6 7.8Z" fill="#F4A81D"/>
+        <path d="M18 15.6c0-4-2.8-6.8-7.4-6.8 0 4 2.8 6.8 7.4 6.8Z" fill="#fff"/>
+      </svg>
+      Unnati
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#how">How it works</a>
+      <a href="#model">Go-to-market</a>
+      <a href="#vision">Vision</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+    <a class="btn btn-rani" href="https://drive.google.com/file/d/1VHZewk5HbMkbqQtWX06bc_YgKAIPu_RF/view?usp=share_link" target="_blank" rel="noopener">Strategy PDF</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Savings that speak her language.</h1>
+        <p class="tagline" lang="hi">आपके सपने, अब आपकी मुट्ठी में!
+          <span class="tagline-en" lang="en">Aapke sapne, ab aapki mutthi mein. Your dreams, now in your hands.</span>
+        </p>
+        <p class="hero-lede">Unnati is a phygital (physical + digital) savings platform built for rural women in India, the country's largest untapped savings market. A simple, voice-operated app, backed by a network of trusted local agents.</p>
+        <div class="hero-actions">
+          <a class="btn btn-rani" href="https://drive.google.com/file/d/1VHZewk5HbMkbqQtWX06bc_YgKAIPu_RF/view?usp=share_link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>
+            Read the product strategy
+          </a>
+          <a class="btn btn-line" href="#how">See how it works</a>
         </div>
-    </header>
+      </div>
 
-    <!-- Main Content -->
-    <main class="pt-20">
-        <!-- Hero Section -->
-        <section id="hero" class="hero-bg relative">
-            <div class="container mx-auto px-6 pt-24 pb-32 text-center relative z-10">
-                <div class="max-w-4xl mx-auto">
-                    <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4 reveal">
-                        Empowering Rural Women
-                    </h1>
-                    <p class="text-2xl md:text-3xl font-medium gradient-text mb-8 reveal" style="transition-delay: 200ms;">
-                        Aapke Sapne, ab aapki muthhi mein!
-                    </p>
-                    <p class="text-lg text-gray-400 max-w-2xl mx-auto mt-12 reveal" style="transition-delay: 400ms;">
-                        Unnati is a 'phygital'(Physical + Digital) financial platform designed to unlock the largest untapped savings market in India: rural women. We build trust and drive adoption through a simple, voice-operated app and a network of local agents.
-                    </p>
-                </div>
+      <div class="demo">
+        <div class="phone" role="group" aria-label="Interactive demo of the Unnati app">
+          <div class="notch" aria-hidden="true"></div>
+          <div class="toast" id="toast" role="status" aria-live="polite"></div>
+          <div class="ph-top">
+            <span class="ph-hello" lang="hi">नमस्ते, सुनीता</span>
+            <span class="pill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              Works offline
+            </span>
+          </div>
+
+          <div class="jar-card">
+            <svg class="pot" viewBox="0 0 120 130" aria-hidden="true">
+              <defs>
+                <clipPath id="potClip">
+                  <path d="M44 14h32v8c0 4-4 6-4 10 18 6 34 22 34 46 0 28-22 46-46 46S14 106 14 78c0-24 16-40 34-46 0-4-4-6-4-10Z"/>
+                </clipPath>
+              </defs>
+              <path d="M44 14h32v8c0 4-4 6-4 10 18 6 34 22 34 46 0 28-22 46-46 46S14 106 14 78c0-24 16-40 34-46 0-4-4-6-4-10Z" fill="#fff"/>
+              <g clip-path="url(#potClip)">
+                <rect id="potFill" x="0" y="124" width="120" height="130" fill="#F4A81D"/>
+              </g>
+              <path d="M44 14h32v8c0 4-4 6-4 10 18 6 34 22 34 46 0 28-22 46-46 46S14 106 14 78c0-24 16-40 34-46 0-4-4-6-4-10Z" fill="none" stroke="#0A3236" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M40 14h40" stroke="#0A3236" stroke-width="5" stroke-linecap="round"/>
+              <path d="M30 70c8 4 52 4 60 0" stroke="#C2185B" stroke-width="3" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div>
+              <p class="jar-name" lang="hi">बेटी की पढ़ाई <small lang="en">Daughter's education</small></p>
+              <p class="jar-amt" id="amt">₹0</p>
+              <p class="jar-goal">of ₹10,000 goal</p>
             </div>
-        </section>
+          </div>
 
-        <!-- Product Vision Section -->
-        <section id="vision" class="bg-gray-900 py-20 md:py-28 relative">
-             <div class="absolute inset-0 bg-grid-gray-700/[0.05] [mask-image:linear-gradient(0deg,transparent,black)]"></div>
-            <div class="container mx-auto px-6 relative">
-                <div class="max-w-4xl mx-auto text-center reveal">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Our Vision</h2>
-                    <p class="text-xl text-gray-400">
-                        To be the most trusted and accessible financial companion for every rural woman in India. We aim to empower her to save confidently, securely grow her wealth and ultimately achieve her family's aspirations.
-                    </p>
-                </div>
-            </div>
-        </section>
+          <div class="ph-row">
+            <div class="mini"><b>0.42 g</b>Digital gold</div>
+            <div class="mini"><b>₹20 / day</b>UPI AutoPay</div>
+          </div>
 
-        <!-- Features Section -->
-        <section id="features" class="py-20 md:py-28 bg-gray-900">
-            <div class="container mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">A Radically Simple Solution</h2>
-                    <p class="text-lg text-gray-400">We address the core barriers of literacy, trust and accessibility with features designed specifically for our users.</p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="feature-grid">
-                    <!-- Feature Cards -->
-                    <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700 reveal feature-card">
-                        <div class="bg-indigo-500/10 text-indigo-400 rounded-full w-12 h-12 flex items-center justify-center mb-4"><i data-lucide="mic"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2">Voice-First, Vernacular UI</h3>
-                        <p class="text-gray-400">Users can interact with the app in their own language, by speaking. No need to read or type complex text.</p>
-                    </div>
-                    <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700 reveal feature-card" style="transition-delay: 100ms;">
-                        <div class="bg-indigo-500/10 text-indigo-400 rounded-full w-12 h-12 flex items-center justify-center mb-4"><i data-lucide="users"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2">Assisted Onboarding</h3>
-                        <p class="text-gray-400">Trusted local 'Sakhi' agents help with instant, paperless eKYC setup, building confidence from day one.</p>
-                    </div>
-                    <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700 reveal feature-card" style="transition-delay: 200ms;">
-                        <div class="bg-indigo-500/10 text-indigo-400 rounded-full w-12 h-12 flex items-center justify-center mb-4"><i data-lucide="piggy-bank"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2">Goal-Based Savings Jars</h3>
-                        <p class="text-gray-400">Visually track progress towards tangible, emotional goals like "Daughter's Education," making saving meaningful.</p>
-                    </div>
-                    <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700 reveal feature-card" style="transition-delay: 300ms;">
-                        <div class="bg-indigo-500/10 text-indigo-400 rounded-full w-12 h-12 flex items-center justify-center mb-4"><i data-lucide="repeat"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2">Flexible Micro-Savings</h3>
-                        <p class="text-gray-400">UPI AutoPay allows for small, automated daily or weekly savings, catering to irregular income streams.</p>
-                    </div>
-                    <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700 reveal feature-card" style="transition-delay: 400ms;">
-                        <div class="bg-indigo-500/10 text-indigo-400 rounded-full w-12 h-12 flex items-center justify-center mb-4"><i data-lucide="gem"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2">Digital Gold Investment</h3>
-                        <p class="text-gray-400">A culturally understood and trusted asset class that simplifies the value proposition and builds on existing mental models.</p>
-                    </div>
-                    <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700 reveal feature-card" style="transition-delay: 500ms;">
-                        <div class="bg-indigo-500/10 text-indigo-400 rounded-full w-12 h-12 flex items-center justify-center mb-4"><i data-lucide="wifi-off"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2">Offline-First Architecture</h3>
-                        <p class="text-gray-400">The app remains functional even with unreliable internet, ensuring a trustworthy and consistent experience.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- GTM Strategy Section -->
-        <section id="strategy" class="py-20 md:py-28 overflow-hidden bg-gray-900">
-            <div class="container mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Our 'Phygital' Go-to-Market Strategy</h2>
-                    <p class="text-lg text-gray-400">For our users, the agent is the platform. Our success is built on a human firewall of trust and support around the digital product.</p>
-                </div>
-                <div class="flex flex-col md:flex-row items-center gap-12">
-                    <div class="md:w-1/2 reveal">
-                        <img src="useone.png" alt="A group of empowered rural women" class="rounded-2xl shadow-2xl shadow-black/20 w-full" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1f2937/4b5563?text=Empowerment';">
-                    </div>
-                    <div class="md:w-1/2 space-y-8 reveal" style="transition-delay: 200ms;">
-                        <div class="flex items-start gap-4">
-                            <div class="bg-pink-500/10 text-pink-400 rounded-full w-10 h-10 flex-shrink-0 flex items-center justify-center mt-1"><i data-lucide="handshake"></i></div>
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Strategic Partnerships</h3>
-                                <p class="text-gray-400">We partner with State Rural Livelihood Missions (SRLMs) and local NGOs to gain access to established SHG networks.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="bg-pink-500/10 text-pink-400 rounded-full w-10 h-10 flex-shrink-0 flex items-center justify-center mt-1"><i data-lucide="user-round"></i></div>
-                            <div>
-                                <h3 class="text-xl font-bold text-white">The 'Sakhi' Agent Network</h3>
-                                <p class="text-gray-400">We recruit and train respected women from local SHGs to act as the human interface for Unnati, turning them into micro-entrepreneurs.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="bg-pink-500/10 text-pink-400 rounded-full w-10 h-10 flex-shrink-0 flex items-center justify-center mt-1"><i data-lucide="store"></i></div>
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Last-Mile Infrastructure</h3>
-                                <p class="text-gray-400">Local Kirana stores act as 'Unnati Points' for cash deposits and withdrawals, creating a robust micro-ATM network.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+          <p class="bubble" id="bubble" lang="hi">बोलिए, जितना चाहें बचाइए</p>
 
-        <!-- Roadmap Section -->
-        <section id="roadmap" class="py-20 md:py-28 bg-gray-900">
-            <div class="container mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Our Roadmap to Impact</h2>
-                    <p class="text-lg text-gray-400">A phased approach to building a holistic financial wellness ecosystem.</p>
-                </div>
-                <!-- Timeline -->
-                <div class="relative">
-                    <div class="absolute left-1/2 -ml-0.5 w-1 bg-gray-700 h-full hidden md:block"></div>
-                    
-                    <div class="relative md:flex md:justify-end mb-8 md:mb-16 timeline-item right">
-                        <div class="md:w-5/12 p-8 bg-gray-800 border border-gray-700 rounded-2xl shadow-lg">
-                            <p class="text-indigo-400 font-semibold mb-2">Phase 1: Foundation & Trust</p>
-                            <h3 class="text-xl font-bold text-white mb-3">Q1-Q2: Validation</h3>
-                            <ul class="space-y-2 text-gray-400 list-disc list-inside">
-                                <li>Validate core value proposition in Dharashiv district.</li>
-                                <li>Test and refine the "Sakhi" agent model.</li>
-                                <li>Launch all MVP features to achieve product-market fit.</li>
-                            </ul>
-                        </div>
-                        <div class="hidden md:block absolute top-1/2 left-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-indigo-500 border-4 border-gray-800"></div>
-                    </div>
-
-                    <div class="relative md:flex md:justify-start mb-8 md:mb-16 timeline-item">
-                         <div class="md:w-5/12 p-8 bg-gray-800 border border-gray-700 rounded-2xl shadow-lg">
-                            <p class="text-pink-400 font-semibold mb-2">Phase 2: Engagement & Diversification</p>
-                            <h3 class="text-xl font-bold text-white mb-3">Q3-Q4: Habit & Education</h3>
-                            <ul class="space-y-2 text-gray-400 list-disc list-inside">
-                                <li>Deepen user engagement with gamified financial literacy.</li>
-                                <li>Launch "Sakhi" Agent Dashboard to empower our network.</li>
-                                <li>Expand product offerings with Recurring Deposits via SFB partnerships.</li>
-                             </ul>
-                        </div>
-                        <div class="hidden md:block absolute top-1/2 left-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-pink-500 border-4 border-gray-800"></div>
-                    </div>
-
-                    <div class="relative md:flex md:justify-end timeline-item right">
-                        <div class="md:w-5/12 p-8 bg-gray-800 border border-gray-700 rounded-2xl shadow-lg">
-                            <p class="text-green-400 font-semibold mb-2">Phase 3: Ecosystem Expansion</p>
-                            <h3 class="text-xl font-bold text-white mb-3">Year 2: Resilience & Growth</h3>
-                            <ul class="space-y-2 text-gray-400 list-disc list-inside">
-                                <li>Evolve into a holistic wellness platform.</li>
-                                <li>Introduce micro-insurance and micro-credit products.</li>
-                                <li>Launch SHG Leader Dashboard to empower communities.</li>
-                            </ul>
-                        </div>
-                        <div class="hidden md:block absolute top-1/2 left-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-green-500 border-4 border-gray-800"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800">
-        <div class="container mx-auto px-6 py-12 text-center">
-            <a href="#" class="text-2xl font-bold text-white flex items-center justify-center mb-4">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-indigo-400 mr-2">
-                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M15 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 15V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 12C12 12 14 10 16 10C18 10 19 11 19 12.5C19 14 18 15 16 15C14 15 12 14 12 12Z" fill="currentColor" opacity="0.2"/>
-                    <path d="M12 12C12 12 10 14 8 14C6 14 5 13 5 11.5C5 10 6 9 8 9C10 9 12 10 12 12Z" fill="currentColor" opacity="0.2"/>
-                    <path d="M12 12C12 12 14 10 16 10C18 10 19 11 19 12.5C19 14 18 15 16 15C14 15 12 14 12 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 12C12 12 10 14 8 14C6 14 5 13 5 11.5C5 10 6 9 8 9C10 9 12 10 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Unnati
-            </a>
-            <p class="mb-6 text-gray-400">Contact: adityashinde4760@gmail.com</p>
-            <p class="text-gray-500">&copy; 2025 Unnati. All rights reserved.</p>
+          <div class="mic-wrap">
+            <button class="mic" id="mic" type="button" aria-label="Try a voice deposit of ₹50">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg>
+            </button>
+            <span class="mic-label" lang="hi">बोलिए</span>
+          </div>
         </div>
-    </footer>
+        <p class="demo-hint">Tap the mic to try a voice deposit, the way she would.</p>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        lucide.createIcons();
+  <!-- Barriers & features -->
+  <section class="sec" id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Three barriers keep her out of formal savings. Unnati is designed around each one.</h2>
+        <p>Literacy, trust and access. Every feature answers one of them.</p>
+      </div>
 
-        // Scroll Animation Logic
-        const revealElements = document.querySelectorAll('.reveal');
-        const timelineElements = document.querySelectorAll('.timeline-item');
+      <div class="barriers">
+        <article class="barrier" style="--c:#C2185B;--tint:#FBE3EC">
+          <h3>Literacy</h3>
+          <p class="why">She shouldn't need to read or type to save.</p>
+          <div class="feat">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg></span>
+            <div><h4>Voice-first, vernacular UI</h4><p>She speaks to the app in her own language. No complex text to read or type.</p></div>
+          </div>
+          <div class="feat">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+            <div><h4>Goal-based savings jars</h4><p>Progress toward goals like "Daughter's education" is shown visually, so saving feels meaningful.</p></div>
+          </div>
+        </article>
 
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+        <article class="barrier" style="--c:#0E4B50;--tint:#DCEBE8">
+          <h3>Trust</h3>
+          <p class="why">Money moves when someone she knows stands behind it.</p>
+          <div class="feat">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <div><h4>Assisted onboarding</h4><p>A trusted local Sakhi agent sets up instant, paperless eKYC, building confidence from day one.</p></div>
+          </div>
+          <div class="feat">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg></span>
+            <div><h4>Digital gold</h4><p>A culturally understood, trusted asset that builds on the mental models she already has.</p></div>
+          </div>
+        </article>
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
+        <article class="barrier" style="--c:#D98A00;--tint:#FDF0D2">
+          <h3>Access</h3>
+          <p class="why">Her income is irregular and her signal is patchy.</p>
+          <div class="feat">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></span>
+            <div><h4>Flexible micro-savings</h4><p>UPI AutoPay sets aside small daily or weekly amounts that fit irregular income.</p></div>
+          </div>
+          <div class="feat">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h.01"/><path d="M8.5 16.43a5 5 0 0 1 7 0"/><path d="M5 12.86a10 10 0 0 1 5.17-2.69"/><path d="M19 12.86a10 10 0 0 0-2-1.52"/><path d="M2 8.82a15 15 0 0 1 4.18-2.64"/><path d="M22 8.82a15 15 0 0 0-11.29-3.76"/><path d="m2 2 20 20"/></svg></span>
+            <div><h4>Offline-first architecture</h4><p>The app keeps working on unreliable internet, so the experience stays consistent and dependable.</p></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-        revealElements.forEach(el => observer.observe(el));
-        timelineElements.forEach(el => observer.observe(el));
+  <!-- Phygital GTM -->
+  <section class="sec model" id="model">
+    <div class="wrap model-grid">
+      <svg class="rings" id="rings" viewBox="0 0 400 400" role="img" aria-labelledby="ringsTitle">
+        <title id="ringsTitle">Unnati's phygital model: the app sits at the centre, surrounded by Unnati Points, Sakhi agents, and SRLM and NGO partners</title>
+        <circle class="ring" data-ring="partners" cx="200" cy="200" r="192" fill="#FFFFFF" stroke="#0A3236" stroke-width="2"/>
+        <circle class="ring" data-ring="sakhi" cx="200" cy="200" r="146" fill="#F7C6D8" stroke="#0A3236" stroke-width="2"/>
+        <circle class="ring" data-ring="points" cx="200" cy="200" r="100" fill="#FBD27A" stroke="#0A3236" stroke-width="2"/>
+        <circle cx="200" cy="200" r="54" fill="#0E4B50"/>
+        <text x="200" y="36" text-anchor="middle" font-size="16" fill="#0A3236">SRLM &amp; NGO partners</text>
+        <text x="200" y="81" text-anchor="middle" font-size="16" fill="#9A1048">Sakhi agents</text>
+        <text x="200" y="126" text-anchor="middle" font-size="16" fill="#0A3236">Unnati Points</text>
+        <text x="200" y="196" text-anchor="middle" font-size="17" fill="#FFFFFF">Unnati</text>
+        <text x="200" y="215" text-anchor="middle" font-size="14" fill="#FBD27A">app</text>
+        <circle cx="200" cy="356" r="9" fill="#C2185B"/>
+        <circle cx="68" cy="268" r="7" fill="#C2185B"/>
+        <circle cx="332" cy="268" r="7" fill="#C2185B"/>
+        <circle cx="96" cy="150" r="6" fill="#0E4B50"/>
+        <circle cx="304" cy="150" r="6" fill="#0E4B50"/>
+      </svg>
 
-        // 3D Hover Effect for Feature Cards
-        const featureGrid = document.getElementById('feature-grid');
-        featureGrid.addEventListener('mousemove', (e) => {
-            const cards = featureGrid.querySelectorAll('.feature-card');
-            cards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const rotateX = (y / rect.height - 0.5) * -15; // Invert for natural feel
-                const rotateY = (x / rect.width - 0.5) * 15;
-                card.style.setProperty('--rotate-x', `${rotateX}deg`);
-                card.style.setProperty('--rotate-y', `${rotateY}deg`);
-            });
+      <div>
+        <div class="sec-head" style="margin-bottom:1.75rem">
+          <h2>For her, the agent is the platform.</h2>
+          <p>Our go-to-market wraps the digital product in a human firewall of trust. Each layer is a person or a place she already knows.</p>
+        </div>
+        <ul class="layers" id="layers">
+          <li tabindex="0" data-ring="partners">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>Strategic partnerships</h3>
+            <p>State Rural Livelihood Missions (SRLMs) and local NGOs open the door to established SHG networks.</p>
+          </li>
+          <li tabindex="0" data-ring="sakhi">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>The Sakhi agent network</h3>
+            <p>Respected women from local SHGs, trained as Unnati's human interface, and earning as micro-entrepreneurs.</p>
+          </li>
+          <li tabindex="0" data-ring="points">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/></svg>Last-mile Unnati Points</h3>
+            <p>Local kirana stores handle cash deposits and withdrawals, forming a micro-ATM network in every village.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision -->
+  <section class="sec vision" id="vision">
+    <div class="wrap vision-grid">
+      <figure class="photo" id="photo">
+        <img src="useone.png" alt="A group of rural women together" onerror="this.parentElement.classList.add('no-img');this.remove();">
+        <span class="fallback" lang="hi" aria-hidden="true">उन्नति</span>
+      </figure>
+      <div>
+        <h2>Our vision</h2>
+        <p class="statement">To be the most trusted and accessible financial companion for every rural woman in India.</p>
+        <p class="support">We want her to save with confidence, grow her wealth securely, and reach the aspirations she holds for her family.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap -->
+  <section class="sec" id="roadmap">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>The roadmap to impact</h2>
+        <p>A phased path from a trusted savings habit to a complete financial wellness ecosystem.</p>
+      </div>
+      <ol class="road" style="list-style:none;margin:0;padding:0">
+        <li class="phase" style="--c:#F4A81D;--n:#0A3236;--c-text:#A86A00">
+          <span class="num">1</span>
+          <p class="when">Q1 to Q2</p>
+          <h3>Foundation &amp; trust</h3>
+          <p class="theme">Validation</p>
+          <ul>
+            <li>Validate the core value proposition in Dharashiv district.</li>
+            <li>Test and refine the Sakhi agent model.</li>
+            <li>Launch all MVP features and reach product-market fit.</li>
+          </ul>
+        </li>
+        <li class="phase" style="--c:#C2185B">
+          <span class="num">2</span>
+          <p class="when">Q3 to Q4</p>
+          <h3>Engagement &amp; diversification</h3>
+          <p class="theme">Habit and education</p>
+          <ul>
+            <li>Deepen engagement with gamified financial literacy.</li>
+            <li>Launch the Sakhi Agent Dashboard to empower the network.</li>
+            <li>Add Recurring Deposits through Small Finance Bank partnerships.</li>
+          </ul>
+        </li>
+        <li class="phase" style="--c:#0E4B50">
+          <span class="num">3</span>
+          <p class="when">Year 2</p>
+          <h3>Ecosystem expansion</h3>
+          <p class="theme">Resilience and growth</p>
+          <ul>
+            <li>Grow into a holistic financial wellness platform.</li>
+            <li>Introduce micro-insurance and micro-credit.</li>
+            <li>Launch the SHG Leader Dashboard to strengthen communities.</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap cta-row">
+      <div>
+        <h2>The complete product strategy, in one document.</h2>
+        <p>Everything on this page, with the full reasoning behind it.</p>
+      </div>
+      <a class="btn btn-gold" href="https://drive.google.com/file/d/1VHZewk5HbMkbqQtWX06bc_YgKAIPu_RF/view?usp=share_link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>
+        Open the strategy PDF
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand" href="#top" aria-label="Back to top">
+      <svg viewBox="0 0 36 36" aria-hidden="true">
+        <circle cx="18" cy="18" r="17" fill="#C2185B"/>
+        <path d="M18 28V15" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M18 19c0-4.6 3.2-7.8 8.6-7.8 0 4.6-3.2 7.8-8.6 7.8Z" fill="#F4A81D"/>
+        <path d="M18 15.6c0-4-2.8-6.8-7.4-6.8 0 4 2.8 6.8 7.4 6.8Z" fill="#fff"/>
+      </svg>
+      Unnati
+    </a>
+    <div>
+      <a class="mail" href="mailto:adityashinde4760@gmail.com">adityashinde4760@gmail.com</a>
+      <small>&copy; 2025 Unnati. All rights reserved.</small>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Header shadow on scroll
+  var head = document.querySelector('.site-head');
+  var onScroll = function(){ head.classList.toggle('scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // ---- Savings jar demo ----
+  var GOAL = 10000, START = 3450, STEP = 50;
+  var TOP = 30, BOTTOM = 124; // fillable range inside the pot
+  var fill = document.getElementById('potFill');
+  var amtEl = document.getElementById('amt');
+  var bubble = document.getElementById('bubble');
+  var mic = document.getElementById('mic');
+  var toast = document.getElementById('toast');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var current = 0;
+
+  function fmt(n){ return '₹' + n.toLocaleString('en-IN'); }
+  function setLevel(n){
+    var pct = Math.min(n / GOAL, 1);
+    fill.setAttribute('y', (BOTTOM - pct * (BOTTOM - TOP)).toFixed(2));
+    amtEl.textContent = fmt(Math.round(n));
+  }
+  function animateTo(target, ms, done){
+    if (reduce){ current = target; setLevel(target); done && done(); return; }
+    var from = current, t0 = null;
+    function tick(t){
+      if (!t0) t0 = t;
+      var p = Math.min((t - t0) / ms, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      current = from + (target - from) * e;
+      setLevel(current);
+      if (p < 1) requestAnimationFrame(tick); else { current = target; done && done(); }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // The one load moment: the pot fills to today's balance
+  setLevel(0);
+  setTimeout(function(){ animateTo(START, 1400); }, reduce ? 0 : 400);
+
+  function typeOut(text, done){
+    bubble.classList.add('said');
+    if (reduce){ bubble.textContent = text; done(); return; }
+    bubble.textContent = '';
+    var i = 0, chars = Array.from(text);
+    var iv = setInterval(function(){
+      bubble.textContent += chars[i++];
+      if (i >= chars.length){ clearInterval(iv); done(); }
+    }, 45);
+  }
+
+  mic.addEventListener('click', function(){
+    if (current >= GOAL) return;
+    mic.disabled = true;
+    mic.classList.add('listening');
+    bubble.classList.remove('said');
+    bubble.textContent = 'सुन रहे हैं…';
+    setTimeout(function(){
+      typeOut('बेटी की पढ़ाई में ₹50 डालो', function(){
+        mic.classList.remove('listening');
+        var next = Math.min(current + STEP, GOAL);
+        animateTo(next, 700, function(){
+          toast.textContent = '₹50 saved to Daughter\u2019s education';
+          toast.classList.add('show');
+          setTimeout(function(){
+            toast.classList.remove('show');
+            bubble.classList.remove('said');
+            bubble.textContent = current >= GOAL ? 'लक्ष्य पूरा हुआ!' : 'बोलिए, जितना चाहें बचाइए';
+            mic.disabled = current >= GOAL;
+          }, 1800);
         });
+      });
+    }, reduce ? 0 : 900);
+  });
 
-        featureGrid.addEventListener('mouseleave', () => {
-            const cards = featureGrid.querySelectorAll('.feature-card');
-            cards.forEach(card => {
-                card.style.setProperty('--rotate-x', '0deg');
-                card.style.setProperty('--rotate-y', '0deg');
-            });
-        });
-
-    </script>
+  // ---- Phygital rings: highlight the layer being read ----
+  var rings = document.getElementById('rings');
+  document.querySelectorAll('#layers li').forEach(function(li){
+    var key = li.getAttribute('data-ring');
+    function on(){
+      rings.classList.add('focus');
+      li.classList.add('on');
+      rings.querySelectorAll('.ring').forEach(function(r){ r.classList.toggle('on', r.getAttribute('data-ring') === key); });
+    }
+    function off(){
+      rings.classList.remove('focus');
+      li.classList.remove('on');
+      rings.querySelectorAll('.ring').forEach(function(r){ r.classList.remove('on'); });
+    }
+    li.addEventListener('mouseenter', on);
+    li.addEventListener('mouseleave', off);
+    li.addEventListener('focus', on);
+    li.addEventListener('blur', off);
+  });
+})();
+</script>
 </body>
 </html>
